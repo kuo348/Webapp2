@@ -1,0 +1,341 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<style>
+  .dx-toast-success {  
+  background-color: #5cb85c;  
+  max-width: 400px;  
+}  
+</style>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div id="toolbar"></div>
+<div id="scheduler"></div>
+<div id="context-menu"></div>
+ 
+<script type="text/javascript">
+const appointmentClassName = '.dx-scheduler-appointment';
+  const cellClassName = '.dx-scheduler-date-table-cell';
+  const data = [
+  {
+    text: 'Watercolor Landscape',
+    roomId: [1],
+    startDate: new Date('2024-11-21 17:30:00'),
+    endDate: new Date('2024-11-21 19:00:00'),
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=MO,TH;COUNT=10',
+  }, {
+    text: 'Oil Painting for Beginners',
+    roomId: [2],
+    startDate: new Date('2024-11-22 17:30:00'),
+    endDate: new Date('2024-11-22 19:00:00'),
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU,WE;COUNT=10',
+  }, {
+    text: 'Testing',
+    roomId: [3],
+    startDate: new Date('2024-11-21 20:00:00'),
+    endDate: new Date('2024-11-21 21:00:00'),
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    text: 'Meeting of Instructors',
+    roomId: [4],
+    startDate: new Date('2024-11-23 17:00:00'),
+    endDate: new Date('2024-11-23 17:15:00'),
+    recurrenceRule: 'FREQ=DAILY;BYDAY=TU;UNTIL=20201203',
+  }, {
+    text: 'Recruiting students',
+    roomId: [5],
+    startDate: new Date('2024-11-22 18:00:00'),
+    endDate: new Date('2024-11-22 19:00:00'),
+    recurrenceRule: 'FREQ=YEARLY;BYWEEKNO=50;WKST=SU',
+    //recurrenceException: '20201212T190000Z',
+  }, {
+    text: 'Final exams',
+    roomId: [3],
+    startDate: new Date('2024-11-20 20:00:00'),
+    endDate: new Date('2024-11-20 21:35:00'),
+    //recurrenceRule: 'FREQ=YEARLY;BYWEEKNO=51;BYDAY=WE,TH',
+  }, {
+    text: 'Monthly Planning',
+    roomId: [4],
+    startDate: new Date('2024-11-20 12:30:00'),
+    endDate: new Date('2024-11-20 13:45:00'),
+    //recurrenceRule: 'FREQ=MONTHLY;BYMONTHDAY=28;COUNT=1',
+  }, {
+    text: 'Open Day',
+    roomId: [5],
+    startDate: new Date('2024-11-19 17:30:00'),
+    endDate: new Date('2024-11-19 21:00:00'),
+   // recurrenceRule: 'FREQ=YEARLY;BYYEARDAY=333',
+  },
+];
+console.log(data);
+const resourcesData = [
+  {
+    text: 'Room 101',
+    id: 1,
+    color: '#bbd806',
+  }, {
+    text: 'Room 102',
+    id: 2,
+    color: '#f34c8a',
+  }, {
+    text: 'Room 103',
+    id: 3,
+    color: '#ae7fcc',
+  }, {
+    text: 'Meeting room',
+    id: 4,
+    color: '#ff8817',
+  }, {
+    text: 'Conference hall',
+    id: 5,
+    color: '#03bb92',
+  },
+];
+var roomResource = {
+    fieldExpr: 'roomId',
+    dataSource: [
+        { id: 1, text: 'Room101', color: 'green' },
+        { id: 2, text: 'Room102', color: 'red' },
+        // ...
+    ]
+};
+    $(document).ready(function(){
+       // DevExpress.config({ licenseKey: 'd54q3da7eBIv2PYSubvNKboBarIhxrEbAbztAT6R3e86oKwReW' });
+        console.log("jquery load.....");
+        $("#scheduler").dxScheduler({
+        // Configuration goes here
+         views: ['day', 'week', 'workWeek'],
+    currentView: 'week',
+    currentDate: new Date(),
+    startDayHour: 9,
+    endDayHour: 21,
+    dataSource: data,
+    //resources: [ roomResource ],
+     /*resourceCellTemplate: function (data, index, element) {
+            element.append("<i style='color: blue'>" + data.text + "</i>");
+        },*/
+    appointmentTemplate:function(model)  {
+      console.log("appointmentTemplate....");
+      var movieInfo='123';
+      var price=123;
+         return $(`${"<div class='showtime-preview'>"
+                        + '<div>'}${model.targetedAppointmentData.text}</div>`
+                        + `<div>Ticket Price: <strong>$${price}</strong>`
+                        + '</div>'
+                        + `<div>${DevExpress.localization.formatDate(model.targetedAppointmentData.displayStartDate, 'shortTime')
+                        } - ${DevExpress.localization.formatDate(model.targetedAppointmentData.displayEndDate, 'shortTime')
+                        }</div>`
+                    + '</div>');
+    },
+   appointmentCollectorTemplate:function(data, index,element)  {
+      console.log("appointmentTemplate....");
+       element.append("<i>123</i>");
+       element.append("<p>Price: 456</p>");
+    },
+     onAppointmentAdding(e) {
+       console.log(e);
+      var currentDate=new Date();
+      if(e.appointmentData.startDate>currentDate)
+      {
+        //e.cancel =  true;
+        //e.component.deleteAppointment(e.appointmentData);
+        //deleteAppointment (e);
+        
+        setTimeout(() => {
+           e.component.deleteAppointment(e.appointmentData);
+            DevExpress.ui.notify({message:'預約失敗...',type:'error',durtion:3000, position: 'top right', direction: 'down-push'} );
+}, "1000");
+        return ;
+      }
+      DevExpress.ui.notify({message:'預約成功',type:'success',durtion:3000, position: 'top right', direction: 'down-push'} );
+     
+    },
+     onAppointmentContextMenu(e) {
+      updateContextMenu(
+        false,
+        appointmentContextMenuItems,
+        appointmentClassName,
+        itemTemplate,
+        onItemClick(e),
+      );
+    },
+    onCellContextMenu(e) {
+      console.log("onCellContextMenu");
+      updateContextMenu(false, cellContextMenuItems, cellClassName, 'item', onItemClick(e));
+    }
+    });
+    const contextMenuInstance = $('#context-menu').dxContextMenu({
+    width: 200,
+    dataSource: [],
+    disabled: true,
+    target: appointmentClassName,
+  }).dxContextMenu('instance');
+$('#toolbar').dxToolbar({
+    items: [{
+      location: 'before',
+      widget: 'dxButton',
+      options: {
+        text:'白班',
+        icon: 'sun',
+        onClick() {
+          var scheduler= $("#scheduler").dxScheduler('instance');
+          if(scheduler.option('currentView')!="month"){
+          scheduler.option('startDayHour',9);
+          scheduler.option('endDayHour',13);
+          DevExpress.ui.notify({message:'切換白天行事曆!',type:'success',durtion:3000, position: 'top right', direction: 'down-push'} );
+         }
+         else {
+           DevExpress.ui.notify({message:'現在檢視模式為月行事曆....',type:'error',durtion:3000, position: 'top right', direction: 'down-push'} );
+         }
+        },
+      },
+    }, {
+      location: 'before',
+      widget: 'dxButton',
+      locateInMenu: 'auto',
+      options: {
+        text:'晚班',
+        icon: 'moon',
+        onClick() {
+          var scheduler= $("#scheduler").dxScheduler('instance');
+          if(scheduler.option('currentView')!="month")
+          {
+            if(scheduler.option('endDayHour')!=21){
+              scheduler.option('endDayHour',21);
+             }
+          
+          scheduler.option('startDayHour',17);
+          //scheduler.option('endDayHour',21);
+          //scheduler.option('offset',12);
+          DevExpress.ui.notify({message:'切換晚上行事曆斑!',type:'success',durtion:3000, position: 'top right', direction: 'down-push'} );
+         }
+         else {
+           DevExpress.ui.notify({message:'現在檢視模式為月行事曆....',type:'error',durtion:3000, position: 'top right', direction: 'down-push'} );
+         }
+        }
+      }}, {
+      location: 'center',
+      locateInMenu: 'never',
+      template() {
+        return $("<div class='toolbar-label'><b>Tom's Club</b> Products</div>");
+      },
+    }],
+  });
+  const updateContextMenu = function (disable, dataSource, target, itemTemplate, onItemClick) {
+    contextMenuInstance.option({
+      dataSource,
+      target,
+      itemTemplate,
+      onItemClick,
+      disabled: disable
+    });
+  };
+
+  const itemTemplate = function (itemData) {
+    return getAppointmentMenuTemplate(itemData);
+  };
+
+  const onItemClick = function (contextMenuEvent) {
+    return function (e) {
+      e.itemData.onItemClick(contextMenuEvent, e);
+    };
+  };
+
+  const createAppointment = function (e) {
+    console.log(e);
+    var currentDate=new Date();
+      if(e.cellData.startDate<currentDate)
+      {
+       DevExpress.ui.notify({message:'予約時間已過，請重新選擇日期時間...',type:'error',durtion:3000, width:'400px',position: 'top right', direction: 'down-push'} );
+        return ;
+      }
+    e.component.showAppointmentPopup({
+      startDate: e.cellData.startDate,
+    }, true);
+  };
+
+  const createRecurringAppointment = function (e) {
+    e.component.showAppointmentPopup({
+      startDate: e.cellData.startDate,
+      recurrenceRule: 'FREQ=DAILY',
+    }, true);
+  };
+
+  const groupCell = function (e) {
+    const scheduler = e.component;
+
+    if (scheduler.option('groups')) {
+      scheduler.option({ crossScrollingEnabled: false, groups: undefined });
+    } else {
+      scheduler.option({ crossScrollingEnabled: true, groups: ['roomId'] });
+    }
+  };
+
+  const showCurrentDate = function (e) {
+    e.component.option('currentDate', new Date());
+  };
+
+  const showAppointment = function (e) {
+    e.component.showAppointmentPopup(e.appointmentData);
+  };
+
+  const deleteAppointment = function (e) {
+    e.component.deleteAppointment(e.appointmentData);
+  };
+
+  const repeatAppointmentWeekly = function (e) {
+    const itemData = e.appointmentData;
+
+    e.component.updateAppointment(itemData, $.extend(itemData, {
+      startDate: e.targetedAppointmentData.startDate,
+      recurrenceRule: 'FREQ=WEEKLY',
+    }));
+  };
+
+  const setResource = function (e, clickEvent) {
+    const itemData = e.appointmentData;
+    console.log("setResource");
+    e.component.updateAppointment(itemData, $.extend(itemData, {
+      roomId: [clickEvent.itemData.id],
+    }));
+  };
+
+  const cellContextMenuItems = [
+    { text: 'New Appointment', onItemClick: createAppointment },
+    { text: 'New Recurring Appointment', onItemClick: createRecurringAppointment },
+    { text: 'Group by Room/Ungroup', beginGroup: true, onItemClick: groupCell },
+    { text: 'Go to Today', onItemClick: showCurrentDate }
+  ];
+
+  let appointmentContextMenuItems = [
+    { text: 'Open', onItemClick: showAppointment },
+    { text: 'Delete', onItemClick: deleteAppointment },
+    { text: 'Repeat Weekly', beginGroup: true, onItemClick: repeatAppointmentWeekly },
+    { text: 'Set Room', beginGroup: true, disabled: true },
+  ];
+
+  $.each(resourcesData, (i, item) => {
+    item.onItemClick = setResource;
+  });
+
+  appointmentContextMenuItems = $.merge(appointmentContextMenuItems, resourcesData);
+
+  const getAppointmentMenuTemplate = function (itemData) {
+    const template = $('<div></div>');
+
+    if (itemData.color) {
+      $('<div>')
+        .addClass('item-badge')
+        .css('background-color', itemData.color)
+        .appendTo(template);
+    }
+    template.append(itemData.text);
+    return template;
+  };
+    });
+</script>

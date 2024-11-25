@@ -5,6 +5,94 @@
       "PackagePath": "staticwebassets/webapp2.bundle.scp.css"
     },
     {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/dx.light.css",
+      "PackagePath": "staticwebassets/css/dx.light.css"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-300.ttf",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-300.ttf"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-300.woff",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-300.woff"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-300.woff2",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-300.woff2"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-400.ttf",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-400.ttf"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-400.woff",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-400.woff"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-400.woff2",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-400.woff2"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-500.ttf",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-500.ttf"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-500.woff",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-500.woff"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-500.woff2",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-500.woff2"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-700.ttf",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-700.ttf"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-700.woff",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-700.woff"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/fonts/Roboto-700.woff2",
+      "PackagePath": "staticwebassets/css/fonts/Roboto-700.woff2"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxicons.ttf",
+      "PackagePath": "staticwebassets/css/icons/dxicons.ttf"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxicons.woff",
+      "PackagePath": "staticwebassets/css/icons/dxicons.woff"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxicons.woff2",
+      "PackagePath": "staticwebassets/css/icons/dxicons.woff2"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxiconsfluent.ttf",
+      "PackagePath": "staticwebassets/css/icons/dxiconsfluent.ttf"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxiconsfluent.woff",
+      "PackagePath": "staticwebassets/css/icons/dxiconsfluent.woff"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxiconsfluent.woff2",
+      "PackagePath": "staticwebassets/css/icons/dxiconsfluent.woff2"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxiconsmaterial.ttf",
+      "PackagePath": "staticwebassets/css/icons/dxiconsmaterial.ttf"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxiconsmaterial.woff",
+      "PackagePath": "staticwebassets/css/icons/dxiconsmaterial.woff"
+    },
+    {
+      "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/icons/dxiconsmaterial.woff2",
+      "PackagePath": "staticwebassets/css/icons/dxiconsmaterial.woff2"
+    },
+    {
       "Id": "/Users/cooper/Repos/dotnet/webapp2/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

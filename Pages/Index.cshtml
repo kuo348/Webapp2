@@ -137,6 +137,20 @@ var roomResource = {
        element.append("<i>123</i>");
        element.append("<p>Price: 456</p>");
     },
+    onAppointmentDeleted(e)
+    {
+        console.log("Appointment was deleted");
+    },
+     onAppointmentDeleting(e)
+    {
+      if(confirm("你確定要刪除嗎？？？")){
+          e.cancel = false;
+      }else {
+          e.cancel = true;
+      }
+     
+      console.log("appointment deleting....");
+    },
      onAppointmentAdding(e) {
        console.log(e);
       var currentDate=new Date();
@@ -147,8 +161,8 @@ var roomResource = {
         //deleteAppointment (e);
         
         setTimeout(() => {
-           e.component.deleteAppointment(e.appointmentData);
-            DevExpress.ui.notify({message:'預約失敗...',type:'error',durtion:3000, position: 'top right', direction: 'down-push'} );
+           //e.component.deleteAppointment(e.appointmentData);
+            DevExpress.ui.notify({message:'預約成功...',type:'error',durtion:3000, position: 'top right', direction: 'down-push'} );
 }, "1000");
         return ;
       }
@@ -285,6 +299,7 @@ $('#toolbar').dxToolbar({
   };
 
   const deleteAppointment = function (e) {
+    console.log("delete appointment...");
     e.component.deleteAppointment(e.appointmentData);
   };
 

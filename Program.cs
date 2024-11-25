@@ -7,7 +7,14 @@ builder.Services.AddRazorPages();
                 .AddCookie(options =>{
                        options.LoginPath="/login";
                     });*/
-//builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/Forbidden/";
+    });
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -25,7 +32,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
-//app.UseAuthorization();
+app.UseAuthorization();
 
 
 app.MapRazorPages();

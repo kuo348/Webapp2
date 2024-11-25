@@ -1,0 +1,7 @@
+/Users/cooper/Repos/dotnet/webapp2/bin/Release/net8.0/publish/webapp2
+/Users/cooper/Repos/dotnet/webapp2/bin/Release/net8.0/publish/appsettings.Development.json
+/Users/cooper/Repos/dotnet/webapp2/bin/Release/net8.0/publish/appsettings.json
+/Users/cooper/Repos/dotnet/webapp2/bin/Release/net8.0/publish/webapp2.dll
+/Users/cooper/Repos/dotnet/webapp2/bin/Release/net8.0/publish/webapp2.deps.json
+/Users/cooper/Repos/dotnet/webapp2/bin/Release/net8.0/publish/webapp2.runtimeconfig.json
+/Users/cooper/Repos/dotnet/webapp2/bin/Release/net8.0/publish/webapp2.pdb

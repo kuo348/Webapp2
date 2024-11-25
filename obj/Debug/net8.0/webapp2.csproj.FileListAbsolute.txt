@@ -28,3 +28,4 @@
 /Users/cooper/Repos/dotnet/webapp2/obj/Debug/net8.0/webapp2.pdb
 /Users/cooper/Repos/dotnet/webapp2/obj/Debug/net8.0/webapp2.genruntimeconfig.cache
 /Users/cooper/Repos/dotnet/webapp2/obj/Debug/net8.0/ref/webapp2.dll
+/Users/cooper/Repos/dotnet/webapp2/obj/Debug/net8.0/webapp2.sourcelink.json

@@ -3,16 +3,29 @@
 
 @{
     ViewData["Title"] = "預約表 (週一至週五)";
+    ViewData["StartDate"] = DateTime.Parse("2024-11-25");
+    ViewData["EndDate"] = DateTime.Parse("2024-11-30");
 }
 <h2>@ViewData["Title"]</h2>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>時間段</th>
+          @{
+            var d="";
+          }
             @foreach (var day in @Model.schedule.Keys)
             {
-                <th>@DateTime.Parse(day).ToString("dddd (MM/dd)")</th>
+               d = day;
+                if(@DateTime.Parse(day).ToString("dddd").EndsWith("六"))
+                {
+                    break ;
+                }
+                <th style="text-align:center">@DateTime.Parse(day).ToString("dddd MM/dd")</th>
+               
             }
+             <th style="text-align:center">時間段</th>
+             <th style="text-align:center">@(((DateTime)ViewData["EndDate"]).ToString("dddd MM/dd"))</th>
         </tr>
     </thead>
     <tbody>
@@ -53,7 +66,11 @@
                 }
               @foreach (var day in @Model.schedule.Keys)
                 {
-        
+                    d = day;
+                     if(@DateTime.Parse(day).ToString("dddd").EndsWith("六"))
+                {
+                    break ;
+                }
                     var slot = @Model.schedule[day].FirstOrDefault(s => s.Time.Hours == @hour);
                     
                     <td>
@@ -67,6 +84,44 @@
                         }
                     </td>
                 }
+                @if(@ix==0){
+                    hour=9;
+                    min=30;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 else if(@ix==1){
+                    hour=10;
+                    min=10;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 else if(@ix==2){
+                    hour=10;
+                    min=50;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 else if(@ix==3){
+                    hour=11;
+                    min=20;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 else if(@ix==4){
+                    hour=11;
+                    min=30;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                else  {
+                  <td></td>
+                }
+               
+     
+                       @if (@ix<5)
+                        {
+                              <td>
+                            <button class="btn btn-success btn-sm">可預約</button>
+                             </td>
+                        }
+                        else{ <td></td>}
+               
             </tr>
         }
     </tbody>

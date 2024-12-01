@@ -50,6 +50,7 @@ public class PrivacyModel : PageModel
         }
     public IActionResult OnGet()
     {
+        ViewData["EndDate"] = DateTime.Parse("2024-11-30");
          // 模擬生成 5 天的時間段 (週一至週五)
            schedule = new Dictionary<string, List<BookingSlot>>();
             var startDate = DateTime.Today;
@@ -61,10 +62,10 @@ public class PrivacyModel : PageModel
             }
 
             // 建立週一至週五的時段資料
+            var slots = new List<BookingSlot>();
             for (int day = 0; day < 5; day++)
             {
                 var currentDate = startDate.AddDays(day);
-                var slots = new List<BookingSlot>();
                // for (int hour = 17; hour < 21; hour++) // 從 5 PM 到 9 PM
                 //{
                 slots.Add(new BookingSlot
@@ -107,7 +108,33 @@ public class PrivacyModel : PageModel
 
                 schedule.Add(currentDate.ToString("yyyy-MM-dd"), slots);
             }
-
+            
+            slots.Add(new BookingSlot
+                    {
+                        Date = Convert.ToDateTime(ViewData["EndDate"]),
+                        Time = new TimeSpan(9, 30, 0),
+                        IsAvailable = true // 預設為可用
+                    });
+                    slots.Add(new BookingSlot
+                    {
+                        Date = Convert.ToDateTime(ViewData["EndDate"]),
+                        Time = new TimeSpan(10, 10, 0),
+                        IsAvailable = true // 預設為可用
+                    });
+                     slots.Add(new BookingSlot
+                    {
+                         Date = Convert.ToDateTime(ViewData["EndDate"]),
+                        Time = new TimeSpan(10, 50, 0),
+                        IsAvailable = true // 預設為可用
+                    });
+                      slots.Add(new BookingSlot
+                    {
+                        Date = Convert.ToDateTime(ViewData["EndDate"]),
+                        Time = new TimeSpan(11,30, 0),
+                        IsAvailable = true // 預設為可用
+                    });
+            schedule.Add(Convert.ToDateTime(ViewData["EndDate"]).ToString("yyyy-MM-dd"), 
+            slots);
             return Page();
     }
 }

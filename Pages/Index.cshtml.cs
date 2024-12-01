@@ -16,4 +16,18 @@ public class IndexModel : PageModel
     {
 
     }
+    public ActionResult HandleButtonOn(string ButtonOn)
+    {
+        try
+        {
+            return Redirect("Privacy");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("failed to connect...");
+            //goto connection;
+        }
+
+       return Redirect("Login");
+    }
 }

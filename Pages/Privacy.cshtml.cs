@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using Newtonsoft.Json;
 namespace webapp2.Pages;
 
 public class PrivacyModel : PageModel
@@ -12,7 +12,7 @@ public class PrivacyModel : PageModel
     [BindProperty]
     public DateTime startDate { get; set; }
      public DateTime endDate { get; set; }
-
+public string desc{get;set;}
         public Dictionary<string, List<BookingSlot>> schedule{ get; set; }
     //public Dictionary<string, List<BookingSlot>> dict=new Dictionary<string, List<BookingSlot>>();
     public PrivacyModel(ILogger<PrivacyModel> logger )
@@ -144,7 +144,7 @@ public class PrivacyModel : PageModel
     }
     public IActionResult OnGet()
     {
-        
+        this.desc="";
         var sDate= "2024-12-02";
         var eDate ="2024-12-07";
         ViewData["startDate"] = Convert.ToDateTime(sDate);
@@ -163,7 +163,7 @@ public class PrivacyModel : PageModel
             GenerateData(sDate,eDate);
             return Partial("_partial_Booking",this);
         }
-    public IActionResult OnPostQuery()//[FromBody] string serializedModel
+    public IActionResult OnPostQuery(string startDate,string endDate)//[FromBody] string serializedModel
         {
             // Deserialize the model
            // var model = JsonConvert.DeserializeObject<PrivacyModel>(serializedModel);
@@ -171,8 +171,9 @@ public class PrivacyModel : PageModel
             // Add a new item to the SelectedValues list
             //model.SelectedValues ??= new List<string>();
             //model.SelectedValues.Add("Default");
-             var sDate= "2024-11-25";
-            var eDate ="2024-11-30";
+            this.desc=startDate;
+            var sDate= startDate;
+            var eDate =endDate;
              ViewData["StartDate"] = Convert.ToDateTime(sDate);
             ViewData["EndDate"] = Convert.ToDateTime(eDate);
             this.startDate = Convert.ToDateTime(sDate);

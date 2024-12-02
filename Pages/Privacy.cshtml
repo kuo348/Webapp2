@@ -57,6 +57,10 @@
           $.ajax({
         method: "post",
         url: "Privacy?handler=Query",
+        data :{
+                "startDate": $('#startDate').val(),
+                "endDate": $('#endDate').val()
+            },
         //加上X-CSRF-TOKEN header
         beforeSend: function (xhr) {
             xhr.setRequestHeader("X-CSRF-TOKEN",

@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "UpOCHdl6cy1/Hjr9T9Nlb5pWF7OX+XTLWUi6COdp1dy8COaGwbhoZmBJRZbf+3qqNfM9pZoebGCL9K4VQrdFcQ==",
+  "dgSpecHash": "G/GUkcSGgyrwCnqnzyrwBxJPuFvb7hy8gDcJ9yWZ2ndC4ino398TdFgs0lv06nmx41ktOmE3sm+P05rOGJkG+Q==",
   "success": true,
   "projectFilePath": "/Users/cooper/Repos/dotnet/webapp2/webapp2.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/cooper/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/Users/cooper/.nuget/packages/system.io.pipelines/9.0.0/system.io.pipelines.9.0.0.nupkg.sha512",
+    "/Users/cooper/.nuget/packages/system.text.encodings.web/9.0.0/system.text.encodings.web.9.0.0.nupkg.sha512",
+    "/Users/cooper/.nuget/packages/system.text.json/9.0.0/system.text.json.9.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

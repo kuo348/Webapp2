@@ -1,128 +1,100 @@
 ﻿@page
 @model PrivacyModel
-
+@using System.Text.Json
+@using Newtonsoft.Json;
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
 @{
     ViewData["Title"] = "預約表 (週一至週五)";
-    ViewData["StartDate"] = DateTime.Parse("2024-11-25");
-    ViewData["EndDate"] = DateTime.Parse("2024-11-30");
+   // ViewData["startDate"] = DateTime.Parse("2024-12-02");
+   // ViewData["sndDate"] = DateTime.Parse("2024-12-07");
+    var startDate = ViewData["startDate"];
+  var endDate = ViewData["endDate"];
+    var token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
 }
 <h2>@ViewData["Title"]</h2>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>時間段</th>
-          @{
-            var d="";
-          }
-            @foreach (var day in @Model.schedule.Keys)
-            {
-               d = day;
-                if(@DateTime.Parse(day).ToString("dddd").EndsWith("六"))
-                {
-                    break ;
-                }
-                <th style="text-align:center">@DateTime.Parse(day).ToString("dddd MM/dd")</th>
-               
-            }
-             <th style="text-align:center">時間段</th>
-             <th style="text-align:center">@(((DateTime)ViewData["EndDate"]).ToString("dddd MM/dd"))</th>
-        </tr>
-    </thead>
-    <tbody>
-         @for (int ix = 0; ix < 6; ix++) 
-        {
-            var hour=12;
-            var min=15;
-            <tr>
-                @if(@ix==0){
-                    hour=12;
-                    min=15;
-                  <td>@hour:@min~@hour:@(@min+30)</td>
-                }
-             @if(@ix==1){
-                 hour=17;
-                 min=30;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-            @if(@ix==2){
-                    hour=18;
-                 min=10;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-             @if(@ix==3){
-                    hour=18;
-                 min=50;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-             @if(@ix==4){
-                    hour=19;
-                   min=30;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-                 @if(@ix==5){
-                    hour=20;
-                   min=10;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-              @foreach (var day in @Model.schedule.Keys)
-                {
-                    d = day;
-                     if(@DateTime.Parse(day).ToString("dddd").EndsWith("六"))
-                {
-                    break ;
-                }
-                    var slot = @Model.schedule[day].FirstOrDefault(s => s.Time.Hours == @hour);
-                    
-                    <td>
-                       @if (slot != null && slot.IsAvailable)
-                        {
-                            <button class="btn btn-success btn-sm">可預約</button>
-                        }
-                        else
-                        {
-                            <span class="text-danger">已預約</span>
-                        }
-                    </td>
-                }
-                @if(@ix==0){
-                    hour=9;
-                    min=30;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-                 else if(@ix==1){
-                    hour=10;
-                    min=10;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-                 else if(@ix==2){
-                    hour=10;
-                    min=50;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-                 else if(@ix==3){
-                    hour=11;
-                    min=20;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-                 else if(@ix==4){
-                    hour=11;
-                    min=30;
-                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
-                }
-                else  {
-                  <td></td>
-                }
-               
-     
-                       @if (@ix<5)
-                        {
-                              <td>
-                            <button class="btn btn-success btn-sm">可預約</button>
-                             </td>
-                        }
-                        else{ <td></td>}
-               
-            </tr>
+
+<form id="form1" method="post">
+  @Html.AntiForgeryToken()
+<input type="hidden" id="startDate" value='@ViewData["startDate"]' />
+<input type="hidden" id="endDate"  value='@ViewData["endDate"]' />
+<div id="toolbar"></div>
+<div>
+<partial name="_partial_Booking" model="Model" />
+</div>
+</form>
+
+<script>
+  
+  $(document).ready(function(){
+
+
+  
+  $('#toolbar').dxToolbar({
+    items: [{
+      location: 'before',
+      widget: 'dxButton',
+      options: {
+        text:'前一週',
+        icon: 'back',
+        onClick() {
+          var startDate=new Date($('#startDate').val())
+          var endDate=new Date($('#endDate').val());
+          $('#startDate').val(addDays(startDate,-7));
+          $('#endDate').val(addDays(endDate,-7));
+          var requestData = {
+                "stratDate": $('#startDate').val(),
+                "endDate": $('#endDate').val()
+            };
+          var serializedModel = JSON.stringify(requestData);
+          var formData = new FormData();
+          formData.append("stratDate", $('#startDate').val);
+          formData.append("endDate", $('#endDate').val);
+           /*$.get("Privacy?handler=ReadMsg").done(function (res) {
+                console.log(res);
+                $("#selectTable").html(res);
+            });*/
+          $.ajax({
+        method: "post",
+        url: "Privacy?handler=Query",
+        //加上X-CSRF-TOKEN header
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        error: function (xhr, status, err) {
+            alert(err);
         }
-    </tbody>
-</table>
+    }).done(function (res) {
+        $("#selectTable").html(res);
+    });
+          //DevExpress.ui.notify({message:$('#startDate').val(),type:'success',durtion:3000, position: 'top right', direction: 'down-push'} );
+
+        },
+      },
+    }, {
+      location: 'before',
+      widget: 'dxButton',
+      locateInMenu: 'auto',
+      options: {
+        text:'下一週',
+        icon: 'chevronright',
+        onClick() {
+          DevExpress.ui.notify({message:'往下一週!',type:'success',durtion:3000, position: 'top right', direction: 'down-push'} );
+         
+        }
+      }}, {
+      location: 'center',
+      locateInMenu: 'never',
+      template() {
+        return $("<div class='toolbar-label'><b>Tom's Club</b> Products</div>");
+      },
+    }],
+  });
+  function addDays(date, days) {
+    const newDate = new Date(date);
+    newDate.setDate(date.getDate() + days);
+    return newDate.toLocaleDateString();
+}
+});
+</script>

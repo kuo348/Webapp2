@@ -15,7 +15,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Forbidden/";
     });
 builder.Services.AddAuthorization();
-
+builder.Services.AddAntiforgery(o => o.HeaderName = "X-CSRF-TOKEN");
+        
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,7 +38,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 //app.MapRazorPages().RequireAuthorization();
-app.MapControllerRoute(
+/*app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
 app.Run();

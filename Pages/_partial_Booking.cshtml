@@ -1,0 +1,122 @@
+@model webapp2.Pages.PrivacyModel
+@{
+}
+<table  id="selectTable"  class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>時間段</th>
+          @{
+            var d="";
+          }
+            @foreach (var day in @Model.schedule.Keys)
+            {
+               d = day;
+                if(@DateTime.Parse(day).ToString("dddd").EndsWith("六"))
+                {
+                    break ;
+                }
+                <th style="text-align:center">@DateTime.Parse(day).ToString("dddd MM/dd")</th>
+               
+            }
+             <th style="text-align:center">時間段</th>
+             <th style="text-align:center">@Model.endDate.ToString("dddd MM/dd")</th>
+        </tr>
+    </thead>
+    <tbody>
+         @for (int ix = 0; ix < 6; ix++) 
+        {
+            var hour=12;
+            var min=15;
+            <tr>
+                @if(@ix==0){
+                    hour=12;
+                    min=15;
+                  <td>@hour:@min~@hour:@(@min+30)</td>
+                }
+             @if(@ix==1){
+                 hour=17;
+                 min=30;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+            @if(@ix==2){
+                    hour=18;
+                 min=10;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+             @if(@ix==3){
+                    hour=18;
+                 min=50;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+             @if(@ix==4){
+                    hour=19;
+                   min=30;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 @if(@ix==5){
+                    hour=20;
+                   min=10;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+              @foreach (var day in @Model.schedule.Keys)
+                {
+                    d = day;
+                     if(@DateTime.Parse(day).ToString("dddd").EndsWith("六"))
+                {
+                    break ;
+                }
+                    var slot = @Model.schedule[day].FirstOrDefault(s => s.Time.Hours == @hour);
+                    
+                    <td>
+                       @if (slot != null && slot.IsAvailable)
+                        {
+                            <button class="btn btn-success btn-sm">可預約</button>
+                        }
+                        else
+                        {
+                            <span class="text-danger">已預約</span>
+                        }
+                    </td>
+                }
+                @if(@ix==0){
+                    hour=9;
+                    min=30;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 else if(@ix==1){
+                    hour=10;
+                    min=10;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 else if(@ix==2){
+                    hour=10;
+                    min=50;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 else if(@ix==3){
+                    hour=11;
+                    min=20;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                 else if(@ix==4){
+                    hour=11;
+                    min=30;
+                  <td>@hour:@min~@(String.Format("{0:00}:{1:00}",@hour+1,(@min+30)%60))</td>
+                }
+                else  {
+                  <td></td>
+                }
+               
+     
+                       @if (@ix<5)
+                        {
+                              <td>
+                            <button class="btn btn-success btn-sm">可預約</button>
+                             </td>
+                        }
+                        else{ <td></td>}
+               
+            </tr>
+        }
+    </tbody>
+</table>

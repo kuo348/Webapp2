@@ -1,7 +1,9 @@
 @model webapp2.Pages.PrivacyModel
 @{
 }
-
+ <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  可預約
+</button>
 <table  id="selectTable"  class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -66,12 +68,14 @@
                 {
                     break ;
                 }
-                    var slot = @Model.schedule[day].FirstOrDefault(s => s.Time.Hours == @hour);
+                    var slot = @Model.schedule[day].FirstOrDefault(s => s.Date==@DateTime.Parse(day) && s.Time.Hours == @hour && s.Time.Minutes==@min);
                     
                     <td>
                        @if (slot != null && slot.IsAvailable)
                         {
-                            <button class="btn btn-success btn-sm">可預約</button>
+                            <button type="button" class="btn btn-success btn-sm" id='@slot.Date.ToString("yyyyMMdd")@hour@min' data-bs-toggle="modal" data-bs-target="#myModal"  data-slot-date='@slot.Date.ToString("yyyy/MM/dd")' data-slot-time='@slot.Time' onClick="submitText(this)">
+  可預約
+</button>
                         }
                         else
                         {
@@ -121,4 +125,30 @@
         }
     </tbody>
 </table>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="save()">Save changes</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <span>@Model.desc</span>

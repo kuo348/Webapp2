@@ -132,13 +132,43 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+        <h4 class="modal-title">預約表單</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-       
+<!---------使用一般的.form-row 格線------->
+<form>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <input type="hidden" id="slotid" />
+    <label for="service" class="col-form-label">服務</label>
+    <select id="service" class="form-select form-select-lg-sm" aria-label=".form-select-lg">
+        <option  value="全身按摩">全身按摩 60分鐘</option>
+         <option  value="局部按摩" selected="true">局部按摩 30分鐘</option>
+         <option  value="局部+腳底按摩">局部+腳底按摩 60分鐘</option>
+        </select>
+  </div>
+  <div class="form-group col-md-8">
+    <label for="user" class="col-form-label">預約人</label>
+    <input type="text" class="form-control" id="user" readonly>
+  </div>
+  <div class="form-group col-md-8">
+    <label for="dept" class="col-form-label">部門</label>
+    <input type="text" id="dept" class="form-control" readonly>
+  </div>
+  <div class="form-group col-md-8">
+    <label for="email" class="col-form-label">電子郵件</label>
+    <input type="text" id="email" class="form-control" readonly>
+  </div>
+  <div class="form-group col-md-8">
+    <label for="tel" class="col-form-label">*聯絡電話</label>
+    <input type="text" id="tel" class="form-control">
+  </div>
+</div>  
+</form>
+
       </div>
 
       <!-- Modal footer -->

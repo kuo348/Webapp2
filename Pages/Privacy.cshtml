@@ -108,8 +108,9 @@ function save()
   var slotbtn=$('#'+$('#slotid').val());
   slotbtn.attr('disabled',true);
   slotbtn.text("已預約");
-  var dialog =new bootstrap.Modal($("#myModal"));
-    dialog.hide();
+ // var dialog =new bootstrap.Modal($("#myModal"));
+    $('#myModal').hide();
+    $('.modal-backdrop').hide();
 
   }
   function submitText(e)
@@ -117,7 +118,11 @@ function save()
     console.log(typeof(e));
             var html="Your name is "+e.getAttribute('data-slot-date')+"<br>Your age is "+e.getAttribute('data-slot-time').substring(0,5)
             +"<input type='text' id='slotid' value='"+e.getAttribute('id')+"' />";
-            $(".modal-body").html(html);
+            $("#slotid").val(e.getAttribute('id'));
+            $("#user").val("cooper");
+            $("#dept").val("資訊處");
+            $("#email").val("cooper.huang@twport.com.tw");
+            //$(".modal-body").html(html);
 
   }
   window.closeModal = function() {

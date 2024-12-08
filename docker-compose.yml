@@ -1,0 +1,8 @@
+version: '3'
+services:
+  aspnetcore-in-docker:
+    image: cooper/webapp2-image
+    container_name: aspnetcore-in-docker
+    ports:
+      - 80:8080
+   

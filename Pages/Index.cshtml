@@ -24,58 +24,173 @@
 <script type="text/javascript">
 const appointmentClassName = '.dx-scheduler-appointment';
   const cellClassName = '.dx-scheduler-date-table-cell';
+
   const data = [
   {
+    id:1,
     text: 'Watercolor Landscape',
     roomId: 1,
-    startDate: new Date('2024-11-21 17:30:00'),
-    endDate: new Date('2024-11-21 19:00:00'),
+    startDate: new Date('2024-12-19 08:00:00'),
+    endDate: new Date('2024-12-19 11:00:00'),
+    color: '#bbd806',
+     colorid:1,
     //recurrenceRule: 'FREQ=WEEKLY;BYDAY=MO,TH;COUNT=10',
   }, {
+    id:2,
     text: 'Oil Painting for Beginners',
     roomId: 2,
-    startDate: new Date('2024-11-22 17:30:00'),
-    endDate: new Date('2024-11-22 19:00:00'),
+    startDate: new Date('2024-12-19 12:00:00'),
+    endDate: new Date('2024-12-19 13:00:00'),
+    color: '#bbd80a6',
+    colorid:2,
     //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU,WE;COUNT=10',
   }, {
+    id:8,
     text: 'Testing',
     roomId: 1,
-    startDate: new Date('2024-11-21 20:00:00'),
-    endDate: new Date('2024-11-21 21:00:00'),
+     startDate: new Date('2024-12-19 12:00:00'),
+    endDate: new Date('2024-12-19 13:00:00'),
+    color: '#bba806',
+    colorid:3,
     //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
   }, {
+    id:3,
     text: 'Meeting of Instructors',
     roomId: 2,
-    startDate: new Date('2024-11-23 17:00:00'),
-    endDate: new Date('2024-11-23 17:15:00'),
+   startDate: new Date('2024-12-19 18:00:00'),
+    endDate: new Date('2024-12-19 19:00:00'),
     recurrenceRule: 'FREQ=DAILY;BYDAY=TU;UNTIL=20201203',
+    color: '#bcd806',
+    colorid:4,
   }, {
+    id:4,
     text: 'Recruiting students',
     roomId: 1,
-    startDate: new Date('2024-11-22 18:00:00'),
-    endDate: new Date('2024-11-22 19:00:00'),
+     startDate: new Date('2024-12-19 14:00:00'),
+    endDate: new Date('2024-12-19 15:00:00'),
     recurrenceRule: 'FREQ=YEARLY;BYWEEKNO=50;WKST=SU',
+    color: '#f34c8a',
+    colorid:5,
     //recurrenceException: '20201212T190000Z',
   }, {
+    id:5,
     text: 'Final exams',
     roomId: 2,
-    startDate: new Date('2024-11-20 20:00:00'),
-    endDate: new Date('2024-11-20 21:35:00'),
+   startDate: new Date('2024-12-19 16:00:00'),
+    endDate: new Date('2024-12-19 17:00:00'),
+    color: '#03bb92',
+    colorid:6,
     //recurrenceRule: 'FREQ=YEARLY;BYWEEKNO=51;BYDAY=WE,TH',
   }, {
+    id:6,
     text: 'Monthly Planning',
-    roomId: 1,
-    startDate: new Date('2024-11-20 12:30:00'),
-    endDate: new Date('2024-11-20 13:45:00'),
+    roomId: 2,
+     startDate: new Date('2024-12-19 10:00:00'),
+    endDate: new Date('2024-12-19 11:00:00'),
+    color: '#ae7fcc',
+    colorid:1,
     //recurrenceRule: 'FREQ=MONTHLY;BYMONTHDAY=28;COUNT=1',
   }, {
+    id:7,
     text: 'Open Day',
-    roomId: 1,
-    startDate: new Date('2024-11-19 17:30:00'),
-    endDate: new Date('2024-11-19 21:00:00'),
+    roomId: 2,
+     startDate: new Date('2024-12-19 19:00:00'),
+    endDate: new Date('2024-12-19 20:00:00'),
+    color: '#f34c8',
+    colorid:2,
    // recurrenceRule: 'FREQ=YEARLY;BYYEARDAY=333',
   },
 ];
+
+  const data2 = [
+ {
+    id:10,
+    text: 'Testing',
+    roomId: 3,
+     startDate: new Date('2024-12-19 12:00:00'),
+    endDate: new Date('2024-12-19 13:00:00'),
+    color: '#bba806',
+     colorid:1,
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:11,
+    text: 'Meeting of Instructors',
+    roomId: 4,
+     colorid:2,
+   startDate: new Date('2024-12-19 11:00:00'),
+    endDate: new Date('2024-12-19 13:00:00'),
+    color: '#fcd90a',
+  }, {
+    id:12,
+    text: 'Recruiting students',
+    roomId: 3,
+     colorid:3,
+     startDate: new Date('2024-12-19 17:00:00'),
+    endDate: new Date('2024-12-19 20:00:00'),
+    color: '#f34c8a',
+    //recurrenceException: '20201212T190000Z',
+  },{
+    id:13,
+    text: 'Open Day',
+    roomId: 4,
+    colorid:4,
+     startDate: new Date('2024-12-19 19:00:00'),
+    endDate: new Date('2024-12-19 20:00:00'),
+    color: '#f3dd08',
+
+  },
+];
+const colordata= [
+  {
+    id:1,
+    color: '#bcd80a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=MO,TH;COUNT=10',
+  }, {
+    id:2,
+    color: '#cbc80c6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU,WE;COUNT=10',
+  }, {
+    id:3,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:4,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:5,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:6,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:7,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:8,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:9,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:10,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }
+  , {
+    id:11,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  }, {
+    id:12,
+    color: '#baa8a6',
+    //recurrenceRule: 'FREQ=WEEKLY;BYDAY=SU;WKST=TU;INTERVAL=2;COUNT=2',
+  },];
 console.log(data);
 const resourcesData = [
   {
@@ -100,13 +215,23 @@ const resourcesData = [
     color: '#03bb92',
   },
 ];
+var place1=  [{ id: 1, text: 'Room101', },
+        { id: 2, text: 'Room102', },]
+var place2=  [{ id: 3, text: 'Room103', },
+        { id: 4, text: 'Room104', },]
 var roomResource = {
     fieldExpr: 'roomId',
-    dataSource: [
-        { id: 1, text: 'Room101', color: 'green' },
-        { id: 2, text: 'Room102', color: 'red' },
-        // ...
-    ]
+   useColorAsDefault: false,
+   
+    dataSource: place1,
+};
+
+var appResource = {
+    fieldExpr: 'colorid',
+    valueExpr: 'id',
+    useColorAsDefault: true,
+    colorExpr:'color',
+    dataSource: resourcesData,
 };
     $(document).ready(function(){
        // DevExpress.config({ licenseKey: 'd54q3da7eBIv2PYSubvNKboBarIhxrEbAbztAT6R3e86oKwReW' });
@@ -114,16 +239,16 @@ var roomResource = {
         $("#scheduler").dxScheduler({
         // Configuration goes here
          views: ['day', 'week', 'workWeek'],
-    currentView: 'week',
+    currentView: 'day',
     currentDate: new Date(),
     startDayHour: 9,
     endDayHour: 21,
     groups:['roomId'],
     dataSource: data,
-    resources: [ roomResource ],
-     /*resourceCellTemplate: function (data, index, element) {
-            element.append("<i style='color: blue'>" + data.text + "</i>");
-        },*/
+    resources: [ roomResource ,appResource],
+     resourceCellTemplate: function (data, index, element) {
+            element.append("<i style='color: '"+data.color+"'+>" + data.text + "</i>");
+        },
     appointmentTemplate:function(model)  {
       console.log("appointmentTemplate....");
       var movieInfo='123';
@@ -238,6 +363,61 @@ $('#toolbar').dxToolbar({
          }
         }
       }}, {
+      location: 'before',
+      widget: 'dxButton',
+      locateInMenu: 'auto',
+      options: {
+        text:'基港大樓',
+        icon: 'user',
+        onClick() {
+          var scheduler= $("#scheduler").dxScheduler('instance');
+           d1=scheduler.option("resources[0]");
+           d2=scheduler.option("resources[1]");
+           console.log(d1.dataSource);
+            console.log(d2.dataSource);
+            //d1.=roomResource2;
+            d1.dataSource =place1;
+            //d2.dataSource =data;
+            scheduler.option("resources[0]",d1);
+            //scheduler.option("resources[1]",d2);
+           scheduler.option("dataSource",data);
+           //scheduler.render();
+            //scheduler.refresh();
+
+        }
+        }
+        }, 
+      
+      {
+      location: 'before',
+      widget: 'dxButton',
+      locateInMenu: 'auto',
+      options: {
+        text:'海港大樓',
+        icon: 'house',
+        onClick() {
+            var scheduler= $("#scheduler").dxScheduler('instance');
+
+             d1=scheduler.option("resources[0]");
+              d2=scheduler.option("resources[1]");
+            console.log(d1.dataSource);
+            console.log(d2.dataSource);
+            //d1.=roomResource2;
+            d1.dataSource=place2;
+            d2.dataSource=data2;
+           // d2.colorExprr="color";
+            //d2.useColorAsDefault=true;
+            
+            scheduler.option("resources[0]",d1);
+            //scheduler.option("resources[1]",d2);
+            scheduler.option("dataSource",data2);
+            //scheduler.render();
+
+        }}
+        
+        },
+      
+      {
       location: 'center',
       locateInMenu: 'never',
       template() {
